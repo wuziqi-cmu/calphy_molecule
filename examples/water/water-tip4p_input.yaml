@@ -1,0 +1,43 @@
+element: [H, O]
+mass: [1.008, 15.9994]
+units: real
+atom_style: full
+calculations:
+- mode: ts
+  temperature: [273, 373]
+  pressure: [1]
+  lattice: [data.tip4p]
+  repeat: [1, 1, 1]
+  state: [liquid]
+  nsims: 1
+  baro: iso
+
+md:
+  pair_style: "lj/cut/tip4p/long 1 2 1 1 0.15 12.0"
+  pair_coeff: ["* * 0.0 0.0", "1 1 0.15500 3.153600"]
+  #pair_style: "lj/cut/tip4p/long 2 1 1 1 0.15 12.0"
+  #pair_coeff: ["1 1*2 0.0 0.0", "2 2 0.15500 3.153600"]
+  kspace_style: "pppm/tip4p 1.0e-4"
+  bond_style: harmonic
+  angle_style: harmonic
+  dihedral_style: none
+  improper_style: none
+  bond_coeff: "1 450 0.9572"
+  angle_coeff: "1 55 104.52"
+  timestep: 1
+  nsmall: 10000
+  tdamp: 100
+  pdamp: 100
+  te: 10000
+  ts: 10000
+  
+  
+queue:
+  scheduler: local
+  cores: 4
+  commands:
+    - conda activate calphy
+
+conv:
+  p_tol: 0.3
+  solid_frac: 0

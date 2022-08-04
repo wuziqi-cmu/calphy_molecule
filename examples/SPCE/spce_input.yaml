@@ -1,0 +1,44 @@
+element: [H, O]
+mass: [1.00794, 15.9994]
+units: real
+atom_style: full
+calculations:
+- mode: fe 
+  temperature: [263]
+  pressure: [1]
+  lattice: [Ice-Ic-40A-box.dat]
+  repeat: [1, 1, 1]
+  state: [solid]
+  nsims: 1
+  baro: iso
+
+md:
+  pair_style: "lj/cut/coul/long 9.8 9.8"
+  pair_coeff: ["1 1 0.15535 3.166", "* 2 0.0000 0.0000"]
+  kspace_style: "pppm 1.0e-4"
+  bond_style: harmonic
+  angle_style: harmonic
+  dihedral_style: none
+  improper_style: none
+  bond_coeff: "1 1000.00 1.000"
+  angle_coeff: "1 100.0 109.47"
+  special_bonds: "lj/coul 0.0 0.0 0.5"
+  neighbor: "2.0 bin"
+  neigh_modify: "every 1 delay 10 check yes"
+  timestep: 1
+  nsmall: 10000
+  tdamp: 100
+  pdamp: 100
+  te: 10000
+  ts: 25000
+  
+  
+queue:
+  scheduler: local
+  cores: 4
+  commands:
+    - conda activate calphy
+
+conv:
+  p_tol: 0.5
+  solid_frac: 0

@@ -1,0 +1,16 @@
+name: calphy_PBL2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pytest
+  - scipy
+  - pyyaml
+  - mendeleev
+  - openmpi 
+  - mpi4py
+  - lammps[build=py38hca48a09_openmpi_6]
+  - pylammpsmpi
+  - pyscal
+  - matplotlib
+  - tqdm

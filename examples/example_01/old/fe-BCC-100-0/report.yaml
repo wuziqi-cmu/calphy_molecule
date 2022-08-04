@@ -1,0 +1,15 @@
+average:
+  spring_constant: '3.24'
+  vol_atom: 11.994574340609393
+input:
+  concentration: '1'
+  element: Fe
+  lattice: bcc
+  pressure: 0.0
+  temperature: 100
+results:
+  error: 0.0
+  free_energy: -4.263450188601854
+  pv: 0.0
+  reference_system: 0.014715845948727936
+  work: -4.278166034550582

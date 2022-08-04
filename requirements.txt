@@ -1,0 +1,11 @@
+numpy
+scipy
+pyyaml
+mendeleev
+lammps 
+mpi4py 
+openmpi
+pylammpsmpi
+pyscal
+pytest
+tqdm

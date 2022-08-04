@@ -1,0 +1,46 @@
+units      real
+dimension  3
+boundary   p p p
+atom_style full
+read_data Ice.dat
+
+# create groups ###
+group ox type 2
+group hy type 1
+
+## set charges - beside manually ###
+set group ox charge -0.830
+set group hy charge 0.415
+
+### TIP3P Potential Parameters ###
+pair_style lj/cut/coul/long 10.0
+pair_coeff 1 1*2 0.000 0.000 
+pair_coeff 2 2 0.102 3.188 
+bond_style  harmonic
+bond_coeff  1 450 0.9572
+angle_style harmonic
+angle_coeff 1 55 104.52
+kspace_style pppm 1.0e-5 #final npt relaxation
+
+fix 1 all shake 1e-6 200 0 b 1 a 1
+velocity all create 1.0 1234546 dist gaussian
+fix 2 all npt temp 1.0 100.0 1000.0 iso 1.0 1.0 1000.0
+
+#Compute RDF and save to file
+# This will compute rdf between oxygen-oxygen, oxygen-hydrogen, and hydrogen-hydrogen
+compute myRDF all rdf 500 1 1 1 2 2 2
+fix 3 all ave/time 2 100 5000 c_myRDF file tip3p.rdf mode vector
+
+neighbor 2.0 bin
+neigh_modify delay 0 every 10 check yes
+thermo      100
+thermo_style custom step temp press vol
+thermo_modify norm no flush yes
+
+#dumps
+dump waterdump all atom 5000 298K.1Bar.dump
+restart 10000 298K.1Bar.restart
+
+#run variables
+timestep 0.5
+run 60000

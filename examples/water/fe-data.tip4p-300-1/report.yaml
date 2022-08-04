@@ -1,0 +1,15 @@
+average:
+  density: 0.09888333560454605
+  vol_atom: 10.092728715381888
+input:
+  concentration: 0.3333333333333333 0.6666666666666666
+  element: H O
+  lattice: file
+  pressure: 1.0
+  temperature: 300
+results:
+  error: 0.0
+  free_energy: 21.43634453342761
+  pv: 6.3119929032777405e-06
+  reference_system: 0.7413855379990185
+  work: -20.868241387058042
